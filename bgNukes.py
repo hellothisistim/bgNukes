@@ -1,7 +1,7 @@
 #
 # bgNukes.py
 #
-# v1.1
+# v1.2
 #
 # Tim BOWMAN [puffy@netherlogic.com]
 #
