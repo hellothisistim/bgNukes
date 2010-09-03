@@ -21,7 +21,7 @@ import subprocess
 # From Nuke
 import nuke
 
-def launch_nukes():
+def launch_nukes(nodes=[]):
     """
     Launch single-core command-line Nuke renderers from inside the Nuke UI.
     """
@@ -29,14 +29,19 @@ def launch_nukes():
     if nuke.root().knob('name').value() == '':
         nuke.message('This script is not named. Please save it and try again.')
         return
-        
+    
+    # Select Write nodes.
+    nodelist = ''
+    if nodes != []:
+        nodelist = ','.join([n.name() for n in nodes if n.Class() == "Write"])
+    
     start = int(nuke.knob("first_frame"))
     end = int(nuke.knob("last_frame"))
-    incr = 1
     instances = nuke.env['numCPUs']
     framerange = str(start) + "-" + str(end)
     p = nuke.Panel("Launch Nukes")
     p.addSingleLineInput("Frames to execute:", framerange)
+    p.addSingleLineInput("Node(s) to execute:", nodelist)
     p.addSingleLineInput("Number of background procs:", instances)
     p.addButton("Cancel")
     p.addButton("OK")
@@ -44,6 +49,7 @@ def launch_nukes():
     
     if not result: return
     framerange = p.value("Frames to execute:")
+    nodelist = p.value("Node(s) to execute:").replace(' ', '')
     inst = int(p.value("Number of background procs:"))
     if framerange is None: 
         return
@@ -52,6 +58,7 @@ def launch_nukes():
 
     (scriptpath, scriptname) = os.path.split(nuke.value("root.name"))
     flags = "-ixm 1"
+    if nodelist != '': flags += " -X " + nodelist
     
     r = nuke.FrameRanges()
     r.add(framerange)
@@ -94,4 +101,4 @@ menubar=nuke.menu("Nuke")
 m = menubar.findItem('Render')
 if not m.findItem('BG Render'):
     m.addCommand('-', '')
-    m.addCommand('BG Render', 'bgNukes.launch_nukes()')
+    m.addCommand('BG Render', 'bgNukes.launch_nukes(nuke.selectedNodes())')
