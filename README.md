@@ -1,25 +1,28 @@
 bgNukes README
 
-# Background
-bgNukes is a tool for launching background renders from [The Foundry's Nuke](http://www.thefoundry.co.uk/products/nuke/), a kick-ass compositing application. It is written by [Tim BOWMAN](http://netherlogic.com).
+# Overview
+bgNukes is a tool for launching background renders from [The Foundry's Nuke](http://www.thefoundry.co.uk/products/nuke/). It is written by [Tim BOWMAN](http://netherlogic.com).
 
 This script exists because our company renderfarm wasn't alive yet and I was already frustrated with rendering in the Nuke UI and tired of typing out command-line render commands to background the renders. I am sharing it because I'm sure my situation was not unique.
 
 Originally, I posted it as launchNukes_inNuke.py (I know -- awful name) on VFXTalk and on my [blog](http://netherlogic.com). As of now, the [official home](http://github.com/timbowman/bgRender) for bgRender will be on GitHub and it will be found also on [Nukepedia](http://www.nukepedia.com/).
 
-# Details
-This script launches a number of command-line render instances in the background and captures their output in log files which are saved to the same directory as the Nuke script. You are now free to keep working in the UI and have your renders happen in the background. You are also free to to launch 8 simultaneous command-line Nuke renderers and fully saturate your fancy 8-core MacPro.
-
-It works in Nuke 5.2 and 6.0 on OS X. One of my goals is to ensure that it works on Nuke5.2 to the current version as well as any platform. Maybe it already does. If you've tested it and it worked (or didn't) please let me know what happened.
-
-# How to use it
+# How to install
 Put bgNukes in your .nuke directory (or somewhere else in your Nuke path if you're fancy), then add this line to your menu.py:
 
 import bgNukes
 
-Importing the module adds a "BG Render" item to the Render menu. From here it's dead simple: load your Nuke script, select "BG Render", and tell it which frames and how many instances you want.
+Importing the module adds a "BG Render" item to the Render menu. 
+
+# How to use
+Select the Write node (or nodes) that you want to render. (If you don't select anything, that's the same as if you selected everything.) Now select the "BG Render" item from the Render menu. In the panel, tell it which frames and how many instances you want and click OK.
 
 Happy Rendering!
+
+# Details
+This script launches a number of command-line render instances in the background and captures their output in log files which are saved to the same directory as the Nuke script. You are now free to keep working in the UI and have your renders happen in the background. You are also free to to launch 8 simultaneous command-line Nuke renderers and fully saturate your fancy 8-core MacPro.
+
+It works in Nuke 5.2 and 6.0 on OS X. One of my goals is to ensure that it works on Nuke5.2 to the current version as well as any platform. Maybe it already does. If you've tested it and it worked (or didn't) please let me know what happened.
 
 # Thank you
 Thanks go to Nathan Dunsworth. His localRender.py was (and continues to be) an excellent reference.
