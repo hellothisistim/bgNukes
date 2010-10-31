@@ -1,7 +1,7 @@
 #
 # bgNukes.py
 #
-# v1.2
+# v1.3
 #
 # Tim BOWMAN [puffy@netherlogic.com]
 #
@@ -14,6 +14,8 @@
 # Thanks go to Nathan Dunsworth. His localRender.py was (and continues 
 # to be) an excellent reference.
 #
+#
+# edited by Ryan O'Phelan for PC compatability
 
 # From Python
 import os
@@ -25,7 +27,7 @@ def launch_nukes(nodes=[]):
     """
     Launch single-core command-line Nuke renderers from inside the Nuke UI.
     """
-    
+
     if nuke.root().knob('name').value() == '':
         nuke.message('This script is not named. Please save it and try again.')
         return
@@ -92,7 +94,7 @@ def launch_nukes(nodes=[]):
         cmd = " ".join([nuke.env['ExecutablePath'], flags, '-F', '"' + instRange + '"', nuke.value("root.name"), '&>', logFile])
         print ">>> starting instance %d" % (i, )
         print "command: " + cmd
-        subprocess.Popen(cmd, shell=True)
+        subprocess.Popen(cmd, shell=False)
     
     nuke.message(str(inst) + ' renderers launched in the background.\nLog files: ' + ', '.join(logs))
     
