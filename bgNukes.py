@@ -27,34 +27,34 @@ import subprocess
 import nuke
 
 class UserInputError( Exception ):
-    '''
+    """
     This Class Is Used For User Input Errors.
-    '''
+    """
 
     def __init__( self, value ) :
-        '''
+        """
         This Method Initializes The Class.
 
         @param value: Error Value Or Message. ( String )
-        '''
+        """
 
         self.value = value
 
     def __str__( self ) :
-        '''
+        """
         This Method Returns The Exception Representation.
         
         @return: Exception Representation. ( String )
-        '''
+        """
 
         return self.value
 
 def launch_nukes_panel_ui( settings = { "nodes" : "", "start" : 1, "end" : 10, "instances" : 1 } ):
-    '''
+    """
     Launch Nukes Ui panel definition.
     
     @param settings: Panel UI Settings. ( Dictionary )
-    '''
+    """
 
     panel = nuke.Panel( "BG Render - Launch Process" )
     panel.addSingleLineInput( "Frames to execute :", "%s-%s" % ( str( settings["start"] ), str( settings["end"] ) ) )
@@ -66,11 +66,11 @@ def launch_nukes_panel_ui( settings = { "nodes" : "", "start" : 1, "end" : 10, "
     return panel, panel.show()
 
 def process_launch_nukes_panel_values( panel ):
-    '''
+    """
     Process Launch Nukes Ui panel values.
 	
 	@param panel: Panel. ( Panel )
-    '''
+    """
 
     framerange = panel.value( "Frames to execute :" )
     nodes = panel.value( "Node(s) to execute :" ).replace( " ", "" )
@@ -90,11 +90,11 @@ def process_launch_nukes_panel_values( panel ):
     return framerange, nodes, instances
 
 def launch_nukes( nodes = None ):
-    '''
+    """
     Launch single-core command-line Nuke renderers from inside the Nuke UI.
 	
 	@param nodes: Nodes. ( List )
-    '''
+    """
 
     if not nuke.root().knob( "name" ).value():
         nuke.message( "%s : Script is not saved, aborting !" % __name__ )
