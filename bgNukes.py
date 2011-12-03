@@ -35,7 +35,7 @@ def launch_nukes(nodes=[]):
     # Select Write nodes.
     nodelist = ''
     if nodes != []:
-        nodelist = ','.join([n.name() for n in nodes if n.Class() == "Write"])
+        nodelist = ','.join([n.name() for n in nodes if "Write" in n.Class()])
     
     start = int(nuke.knob("first_frame"))
     end = int(nuke.knob("last_frame"))
