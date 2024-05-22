@@ -5,8 +5,6 @@ bgNukes is a tool for launching background renders from [The Foundry's Nuke](htt
 
 This script exists because our company renderfarm wasn't alive yet and I was already frustrated with rendering in the Nuke UI and tired of typing out command-line render commands to background the renders. I am sharing it because I'm sure my situation was not unique.
 
-Originally, I posted it as launchNukes_inNuke.py (I know -- awful name) on VFXTalk. As of now, the [official home](http://github.com/timbowman/bgRender) for bgRender will be on GitHub and it will be found also on [Nukepedia](http://www.nukepedia.com/).
-
 # How to install
 Put bgNukes in your .nuke directory (or somewhere else in your Nuke path if you're fancy), then add this line to your menu.py:
 
