@@ -1,7 +1,7 @@
 bgNukes README
 
 # Overview
-bgNukes is a tool for launching background renders from [The Foundry's Nuke](http://www.thefoundry.co.uk/products/nuke/). It is written by [Tim BOWMAN](http://netherlogic.com).
+bgNukes is a tool for launching background renders from [The Foundry's Nuke](http://www.thefoundry.co.uk/products/nuke/). It is written by [Tim BOWMAN](http://hellothisistim.com).
 
 This script exists because our company renderfarm wasn't alive yet and I was already frustrated with rendering in the Nuke UI and tired of typing out command-line render commands to background the renders. I am sharing it because I'm sure my situation was not unique.
 
@@ -28,7 +28,7 @@ It works in Nuke 5.2 and 6.0 on OS X. One of my goals is to ensure that it works
 Thanks go to Nathan Dunsworth. His localRender.py was (and continues to be) an excellent reference.
 
 # LICENSE
-Copyright (c) 2010 Tim BOWMAN
+Copyright (c) 2010-2024 Tim BOWMAN
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
