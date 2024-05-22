@@ -1,9 +1,9 @@
 #
 # bgNukes.py
 #
-# v1.3
+# v2.0
 #
-# Tim BOWMAN [puffy@netherlogic.com]
+# Tim BOWMAN [tim@hellothisistim.com]
 #
 # A script for launching single-core command-line Nuke renderers 
 # in the background from inside the Nuke UI.
@@ -13,9 +13,6 @@
 #
 # Thanks go to Nathan Dunsworth. His localRender.py was (and continues 
 # to be) an excellent reference.
-#
-#
-# edited by Ryan O'Phelan for PC compatability
 
 # From Python
 import os
@@ -59,41 +56,41 @@ def launch_nukes(nodes=[]):
         return
 
     (scriptpath, scriptname) = os.path.split(nuke.value("root.name"))
-    flags = "-ixm 1"
+    flags = "-xim 1"
     if nodelist != '': flags += " -X " + nodelist
     
     r = nuke.FrameRanges()
     r.add(framerange)
     r.compact()
     frame_list = r.toFrameList()
-    print frame_list
+    print(frame_list)
     
     # Create lists of frames to render for each instance.
     inst_frame_list = []
     for i in range(inst): inst_frame_list.append([])
-    print inst_frame_list
+    print(inst_frame_list)
     cnt = 0
     for frame in frame_list:
         inst_frame_list[cnt].append(str(frame))
         cnt += 1
         if cnt == inst: cnt = 0
-    print inst_frame_list
+    print(inst_frame_list)
     
-    print ">>> launching", inst, "nuke instances"
+    print(">>> launching", inst, "nuke instances")
     
     # Launch each renderer
     logs = []
     for i in range(inst):
         instRange = ' '.join(inst_frame_list[i])
 
-        print ">>> frame list for instance", i, "is:", instRange
+        print(">>> frame list for instance", i, "is:", instRange)
         
         logFile = "%s/%s_log%02d.log" % (scriptpath, scriptname, i)
         logs.append(logFile)
         
-        cmd = " ".join([nuke.env['ExecutablePath'], flags, '-F', '"' + instRange + '"', nuke.value("root.name"), '&>', logFile])
-        print ">>> starting instance %d" % (i, )
-        print "command: " + cmd
+        cmd = " ".join(['"' + nuke.env['ExecutablePath'] + '"', flags, '-F', '"' + instRange + '"', nuke.value("root.name"), '>', logFile])
+        print(">>> starting instance %d" % (i, ))
+        print("command: " + cmd)
         subprocess.Popen(cmd, shell=True)
     
     nuke.message(str(inst) + ' renderers launched in the background.\nLog files: ' + ', '.join(logs))
