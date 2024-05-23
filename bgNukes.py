@@ -88,7 +88,7 @@ def launch_nukes(nodes=[]):
         logFile = "%s/%s_log%02d.log" % (scriptpath, scriptname, i)
         logs.append(logFile)
         
-        cmd = " ".join(['"' + nuke.env['ExecutablePath'] + '"', flags, '-F', '"' + instRange + '"', nuke.value("root.name"), '>', logFile])
+        cmd = " ".join(['"' + nuke.env['ExecutablePath'] + '"', flags, '-F', '"' + instRange + '"', '"' + nuke.value("root.name") + '"', '>', logFile])
         print(">>> starting instance %d" % (i, ))
         print("command: " + cmd)
         subprocess.Popen(cmd, shell=True)
